@@ -7,7 +7,7 @@ and over again (to infinity).  Licensed under the BSD license - see LICENSE.txt.
 Folding paper?
 --------------
 
-Imagin you have strip of paper, just your plain strip of paper. Looks a bit
+Imagine you have strip of paper, just your plain strip of paper. Looks a bit
 like so:
 
     ┌─────────────────────────────────────────────────────────────────┐
