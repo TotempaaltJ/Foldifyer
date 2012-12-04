@@ -92,11 +92,32 @@ class TKDrawer(Drawer):
 
     def step(self, step):
         super(TKDrawer, self).step(step)
+        eta = ''
         try:
-            self.stringvar.set('ETA: ' + time.ctime(float(self.eta)))
+            eta = time.ctime(float(self.eta))
         except ValueError:
-            from_now = self.eta - decimal.Decimal(time.time())
-            self.stringvar.set('ETA: ' + str(from_now) + ' seconds from now')
+            seconds = self.eta - decimal.Decimal(time.time())
+
+            unit_limits = [("seconds", 1),
+                           ("minutes", 60),
+                           ("hours", 3600),
+                           ("days", 24 * 3600),
+                           ("weeks", 7 * 24 * 3600),
+                           ("months", 30 * 24 * 3600),
+                           ("years", 365 * 24 * 3600),
+
+                           ("decades", 10 * 365 * 24 * 3600),
+                           ("centuries", 100 * 365 * 24 * 3600),
+                           ("millenia", 1000 * 365 * 24 * 3600),
+                           ("times the age of the solar system", 4.568e9 * 365 * 24 * 3600),
+                           ("times the age of the universe", 4.339e17)]
+
+            for unit_name, limit in unit_limits:
+                if seconds >= limit:
+                    amount = seconds / decimal.Decimal(limit)
+                    eta = ' '.join(['{0:G}'.format(amount), unit_name, 'from now'])
+
+        self.stringvar.set('ETA: ' + eta)
 
 class Settings(Frame):
     def create_widgets(self):
@@ -112,10 +133,6 @@ class Settings(Frame):
         self.rounding.set(4)
         self.rounding.pack()
 
-        self.stringvar = StringVar(value='Eta: ...')
-        self.eta = Label(self, textvariable=self.stringvar)
-        self.eta.pack()
-
     def __init__(self, master=None):
         Frame.__init__(self, master)
         self.pack()
@@ -124,8 +141,12 @@ class Settings(Frame):
 
 class Instructions(Frame):
     def create_widgets(self):
+        self.stringvar = StringVar(value='Eta: ...')
+        self.eta = Label(self, textvariable=self.stringvar)
+        self.eta.pack(side='left')
+
         self.instr = Entry(self, width=60)
-        self.instr.pack(side='left', expand=1)
+        self.instr.pack(side='left')
 
         self.draw = Button(self)
         self.draw['text'] = 'Draw'
@@ -145,7 +166,7 @@ class Application(Frame):
         angle = settings.angle.get()
         rouding = settings.rounding.get()
 
-        drw = TKDrawer(instr, self.left.stringvar, length, angle, rouding, t=self.turtle)
+        drw = TKDrawer(instr, self.f_instr.stringvar, length, angle, rouding, t=self.turtle)
         drw.draw()
 
     def create_widgets(self):
