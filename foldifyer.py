@@ -152,7 +152,7 @@ class Application(Frame):
         self.left = Settings(self)
         self.right = Frame(self)
 
-        self.cv = Canvas(self.right, width=1440, height=850)
+        self.cv = Canvas(self.right, width=1200, height=700)
         self.cv.pack(side=TOP)
         self.init_turtle()
 
