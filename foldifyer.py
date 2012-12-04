@@ -57,9 +57,12 @@ class Drawer(object):
         self.t.forward(self.length-self.rounding)
         direction = self.t.right if step else self.t.left
 
-        direction(self.angle/2)
-        self.t.forward(sqrt(2*self.rounding**2))
-        direction(self.angle/2)
+        if self.angle:
+            direction(self.angle/2)
+            self.t.forward(sqrt(2*self.rounding**2))
+            direction(self.angle/2)
+        else:
+            direction(self.angle)
 
         self.step_n += decimal.Decimal(1)
         self.time_diff = decimal.Decimal(time.time()) - self.start
