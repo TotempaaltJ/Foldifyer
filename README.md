@@ -48,4 +48,4 @@ Foldifyer is written specifically so it can take an infinite amount of
 instructions.  Be weary though it'll take very long to draw long sets of
 instructions. Seeing this should not surprise you:
 
-![Foldifyer screenshot](http://i.imgur.com/AUKm7.png)
+![Foldifyer screenshot](http://i.imgur.com/TNymC.png)
