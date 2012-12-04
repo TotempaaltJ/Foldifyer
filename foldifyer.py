@@ -34,7 +34,7 @@ class Drawer(object):
         self.length = length
         self.angle = angle
         self.rounding = rounding
-        
+
         self.t = t if t is not None else turtle
         self.t.reset()
         self.t.hideturtle()
@@ -56,7 +56,7 @@ class Drawer(object):
     def step(self, step):
         self.t.forward(self.length-self.rounding)
         direction = self.t.right if step else self.t.left
-        
+
         direction(self.angle/2)
         self.t.forward(sqrt(2*self.rounding**2))
         direction(self.angle/2)
@@ -64,7 +64,7 @@ class Drawer(object):
         self.step_n += decimal.Decimal(1)
         self.time_diff = decimal.Decimal(time.time()) - self.start
         self.eta = self.start + (self.time_diff/self.step_n) * self.steps
-        
+
 
 def draw_fold(instr, length=30, angle=90, rounding=0, t=None):
     if t is None:
@@ -75,7 +75,7 @@ def draw_fold(instr, length=30, angle=90, rounding=0, t=None):
     for step in line:
         t.forward(length-rounding)
         direction = t.right if step else t.left
-        
+
         direction(angle/2)
         t.forward(sqrt(2*rounding^2))
         direction(angle/2)
@@ -103,7 +103,7 @@ class Settings(Frame):
         self.length = Scale(self, label='Length', from_=0, to=50, orient=HORIZONTAL)
         self.length.set(20)
         self.length.pack()
-        
+
         self.angle = Scale(self, label='Angle', from_=0, to=180, orient=HORIZONTAL)
         self.angle.set(90)
         self.angle.pack()
@@ -115,7 +115,7 @@ class Settings(Frame):
         self.stringvar = StringVar(value='Eta: ...')
         self.eta = Label(self, textvariable=self.stringvar)
         self.eta.pack()
-        
+
     def __init__(self, master=None):
         Frame.__init__(self, master)
         self.pack()
@@ -147,11 +147,11 @@ class Application(Frame):
 
         drw = TKDrawer(instr, self.left.stringvar, length, angle, rouding, t=self.turtle)
         drw.draw()
-    
+
     def create_widgets(self):
         self.left = Settings(self)
         self.right = Frame(self)
-        
+
         self.cv = Canvas(self.right, width=1440, height=850)
         self.cv.pack(side=TOP)
         self.init_turtle()
@@ -165,7 +165,7 @@ class Application(Frame):
     def init_turtle(self):
         self.turtle = turtle.RawTurtle(self.cv)
         self.turtle.hideturtle()
-    
+
     def __init__(self, master=None):
         Frame.__init__(self, master)
         self.pack()
