@@ -4,6 +4,8 @@ Foldifyer
 A program to visualize how it would look if you'd fold a strip of paper over
 and over again (to infinity).  Licensed under the BSD license - see LICENSE.txt.
 
+All you need is Python 2.x which should have Tkinter preinstalled.
+
 Folding paper?
 --------------
 
